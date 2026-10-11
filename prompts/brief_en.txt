@@ -1,0 +1,14 @@
+Create an elite, comprehensive Content Brief grounded completely in competitor intelligence and semantic gaps for the topic: {topic_context}.
+
+Critical Semantic Gaps (Must-Cover Core Entities):
+{critical}
+
+High-Priority Supporting Topics:
+{high}
+
+Architectural & Quality Guidelines:
+- Return pure semantic HTML only inside <article dir="ltr" lang="en"> using: h1, h2, h3, h4, p, ul, ol, li, table, thead, tbody, tr, th, td, blockquote.
+- Absolutely NO Markdown, no #, no **, and no code fences (```).
+- Design a logical reader journey that perfectly satisfies the search intent and outranks competitor content using authoritative E-E-A-T signals.
+- Distribute the critical entities and missing topics strategically across headings, subheadings, and actionable writer bullet points.
+- Conclude with a high-value Frequently Asked Questions (FAQ) section addressing real user queries.

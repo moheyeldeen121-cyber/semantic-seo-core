@@ -1,0 +1,48 @@
+# Render Blueprint — Semantic SEO Tool (FREE plan profile)
+# Deploy: Render Dashboard → New → Blueprint → pick this GitHub repo.
+#
+# Free plan = 512 MB RAM, 0.1 CPU, sleeps after 15 min without traffic
+# (first request after that waits ~1 min), local files wiped on sleep.
+# Chromium is therefore OFF here; JS-rendered pages fall back to the
+# embedded-data readers and the optional r.jina.ai reader.
+# To upgrade later: set `plan: standard` and ENABLE_BROWSER_FALLBACK=true.
+services:
+  - type: web
+    name: semantic-seo-tool
+    runtime: docker
+    plan: free
+    region: frankfurt          # closest Render region to Egypt; cannot be changed later
+    healthCheckPath: /health
+    envVars:
+      # ── Secrets (entered in the Render Dashboard, never in the repo) ──
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: APP_USERNAME
+        value: admin
+      - key: APP_PASSWORD
+        generateValue: true    # random strong password; read it from the Dashboard
+      # ── Model & behaviour ──
+      - key: CLAUDE_DEFAULT_MODEL
+        value: claude-sonnet-5
+      - key: AI_TEMPERATURE
+        value: "0.0"
+      # ── Required behind Render's HTTPS proxy (same-origin checks, real client IP) ──
+      - key: TRUST_PROXY_HEADERS
+        value: "true"
+      - key: ENABLE_HSTS
+        value: "true"
+      - key: FLASK_DEBUG
+        value: "false"
+      # ── Free-plan resource profile (512 MB / 0.1 CPU) ──
+      - key: ENABLE_BROWSER_FALLBACK
+        value: "false"         # Chromium does not fit in 512 MB next to the app
+      - key: ENABLE_JINA_FALLBACK
+        value: "true"          # external reader renders JS pages instead (public URLs only)
+      - key: MAX_ACTIVE_JOBS
+        value: "1"
+      - key: MAX_FETCH_WORKERS
+        value: "4"
+      - key: MAX_SOURCE_WORKERS
+        value: "3"
+      - key: MAX_CHUNK_WORKERS
+        value: "1"
